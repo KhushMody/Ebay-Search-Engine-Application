@@ -16,9 +16,33 @@
 <!--        app:tabSelectedTextColor="@android:color/white"-->
 <!--        app:tabTextColor="@android:color/darker_gray"-->
 <!--        android:contentDescription="Tabs for Search and Wishlist" />-->
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        style="@style/PurpleTextView"-->
+<!--        android:textSize="30dp"-->
+<!--        android:text="Product Search"></TextView>-->
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:background="#A339A3"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            app:titleTextColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/PurpleTextView"
+        app:tabTextColor="@color/white"
         android:id="@+id/tabLayout">
 
         <com.google.android.material.tabs.TabItem

@@ -12,7 +12,6 @@
         android:text="Keyword"
         android:layout_marginTop="8dp"/>
 
-
     <!-- Keyword EditText -->
     <EditText
         android:id="@+id/editTextKeyword"
@@ -21,13 +20,22 @@
         android:layout_below="@id/textViewKeyword"
         android:hint="Enter Keyword"
         android:layout_marginTop="8dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter mandatory field"
+        android:layout_below="@+id/editTextKeyword"
+        android:id="@+id/keywordValidation"
+        android:textColor="#FF0000"
+        android:visibility="gone"></TextView>
+
 
     <TextView
         android:id="@+id/textViewCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Category"
-        android:layout_below="@id/editTextKeyword"
+        android:layout_below="@id/keywordValidation"
         android:layout_marginTop="8dp" />
     <!-- Category Spinner -->
     <Spinner
@@ -59,18 +67,24 @@
             android:id="@+id/checkboxNew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/checkBoxStyle"
+            android:textColor="@color/black"
             android:text="New"/>
 
         <CheckBox
             android:id="@+id/checkboxUsed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/checkBoxStyle"
+            android:textColor="@color/black"
             android:text="Used"/>
 
         <CheckBox
             android:id="@+id/checkboxUnspecified"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/checkBoxStyle"
+            android:textColor="@color/black"
             android:text="Unspecified"/>
 
     </LinearLayout>
@@ -95,12 +109,16 @@
             android:id="@+id/checkboxLocalPickup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/checkBoxStyle"
+            android:textColor="@color/black"
             android:text="Local Pickup"/>
 
         <CheckBox
             android:id="@+id/checkboxFreeShipping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/checkBoxStyle"
+            android:textColor="@color/black"
             android:text="Free Shipping"/>
 
     </LinearLayout>
@@ -122,7 +140,9 @@
         <CheckBox
             android:id="@+id/checkboxEnableNearby"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:theme="@style/checkBoxStyle"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
@@ -131,7 +151,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/enableNearbyLayout">
+        android:layout_below="@id/enableNearbyLayout"
+        android:visibility="gone"
+        >
 
         <TextView
             android:id="@+id/textViewDistance"
@@ -157,13 +179,13 @@
 
         <!-- From Radio Buttons and EditText -->
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/radioLayout"
         android:orientation="vertical">
 
         <RadioGroup
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/radioGroupFrom"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp">
@@ -172,6 +194,8 @@
                 android:id="@+id/radioButtonCurrentLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:theme="@style/checkBoxStyle"
+                android:textColor="@color/black"
                 android:text="Current Location"
                 android:checked="true"/>
 
@@ -179,18 +203,35 @@
                 android:id="@+id/radioButtonZipCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:theme="@style/checkBoxStyle"
+                android:textColor="@color/black"
                 android:text=""
                 android:checked="false"/>
 
-            <EditText
-                android:id="@+id/editTextZipCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Enter Zip Code"
-                android:inputType="number"
-                android:layout_toRightOf="@id/radioButtonZipCode"
-                android:enabled="false"/> <!-- Initially disabled -->
+             <!-- Initially disabled -->
         </RadioGroup>
+        <AutoCompleteTextView
+            android:id="@+id/editTextZipCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Zipcode"
+            android:textColorHint="#808080"
+            android:inputType="number"
+            android:layout_alignBottom="@id/radioGroupFrom"
+            android:layout_toRightOf="@id/radioGroupFrom"
+            android:theme="@style/checkBoxStyle"
+            android:textColor="@color/black"
+            android:enabled="false"
+            android:layout_marginLeft="-100dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please enter mandatory field"
+            android:layout_below="@+id/editTextZipCode"
+            android:id="@+id/zipcodeValidation"
+            android:textColor="#FF0000"
+            android:visibility="gone"></TextView>
 
     <!-- EditText for Zip Code -->
 
@@ -205,19 +246,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/nearbyOptionsLayout"> <!-- Adjust accordingly -->
+        android:layout_below="@id/nearbyOptionsLayout"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp">
 
         <Button
             android:id="@+id/buttonSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search"/>
+            android:background="#FF8400"
+            android:textColor="#FFFFFF"
+            android:text="Search"
+            android:layout_marginRight="5dp"
+            />
 
         <Button
             android:id="@+id/buttonClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clear"/>
+            android:background="#FF8400"
+            android:textColor="#FFFFFF"
+            android:text="Clear"
+            android:layout_marginLeft="5dp"
+            />
     </LinearLayout>
 
 

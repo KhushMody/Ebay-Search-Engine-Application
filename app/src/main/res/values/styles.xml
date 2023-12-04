@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="OrangeButton">
+        <item name="android:background">#FFA500</item> <!-- Orange background color -->
+        <item name="android:textColor">#FFFFFF</item> <!-- White text color -->
+    </style>
+
+    <style name="PurpleTextView">
+        <item name="android:background">#A339A3</item> <!-- Purple background color -->
+        <item name="android:textColor">#FFFFFF</item> <!-- White text color -->
+    </style>
+
+    <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
+        <item name="colorAccent">#A339A3</item>
+        <item name="android:textColorSecondary">#000000</item>
+    </style>
+
+    <style name="MyThemeOverlay_Toolbar2" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+
+        <!-- This attributes is used by navigation icon and overflow icon -->
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+</resources>
