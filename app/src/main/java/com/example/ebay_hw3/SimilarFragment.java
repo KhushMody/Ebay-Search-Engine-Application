@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ public class SimilarFragment extends Fragment {
     private Observer<ObjectModel> observerEvents;
     public SimilarProductsAdapter similarProductsAdapter;
     public RecyclerView recyclerView;
+    RelativeLayout relativeLayout;
     public SimilarProductsResponse similarProductsResponse;
     public ArrayList<SimilarProductsResponse.Item> items;
     private static final String ARG_PARAM1 = "itemId";
@@ -78,11 +80,13 @@ public class SimilarFragment extends Fragment {
         recyclerView = view.findViewById(R.id.similarList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         similarProductsAdapter = new SimilarProductsAdapter(items);
+        relativeLayout = view.findViewById(R.id.progressLoadingSimilar);
         recyclerView.setAdapter(similarProductsAdapter);
         observerEvents = objectModel -> {
             if (objectModel.isStatus()) {
                 //Log.d("khushmody", ((SearchResultsResponse) objectModel.getObj()).findItemsAdvancedResponse.get(0).searchResult.get(0).count.toString());
                 similarProductsResponse = (SimilarProductsResponse) objectModel.getObj();
+                relativeLayout.setVisibility(View.GONE);
 
                 // Extract the data you need from searchResponse
 
@@ -98,6 +102,7 @@ public class SimilarFragment extends Fragment {
 
                 // Start the SearchResultsActivity with the Intent
             } else {
+                relativeLayout.setVisibility(View.GONE);
                 Log.d("khushmodySimilar", objectModel.getMessage());
             }
         };

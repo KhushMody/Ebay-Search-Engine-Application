@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -136,10 +137,12 @@ public class ItemDetailsActivity extends AppCompatActivity {
                     searchResultsViewModel.removeFromCart(itemId);
                     removeFavourite(itemId);
                     cart.setImageDrawable(getDrawable(R.drawable.cart_plus));
+                    Toast.makeText(getApplicationContext() , title.substring(0,10)+"... was removed from wishlist", Toast.LENGTH_SHORT).show();
                 }else{
                     searchResultsViewModel.addToCart(title, itemId, price, image, shippingCost, zipCode, condition);
                     addToFavorites(new FavouritesResponse(itemId, image, title, price, zipCode, shippingCost, condition, true));
                     cart.setImageDrawable(getDrawable(R.drawable.cart_remove));
+                    Toast.makeText(getApplicationContext() , title.substring(0,10)+"... was added to wishlist", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -212,8 +215,9 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.facebook) {
+
             String quote = "Buy " + title + " at " + price + " from " + viewItemUrl + " below.";
-            String url = "https://www.facebook.com/sharer/sharer.php?u=" + viewItemUrl + "&quote=" + quote;
+            String url = "https://www.facebook.com/sharer/sharer.php?u=" + viewItemUrl + "&quote=" + quote + "&hashtag=%23CSCI571Fall23AndroidApp";
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(browserIntent);
             // Do something

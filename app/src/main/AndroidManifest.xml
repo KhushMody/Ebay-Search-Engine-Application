@@ -18,9 +18,11 @@
             android:exported="false" />
         <activity
             android:name=".ItemDetailsActivity"
+            android:theme="@style/Theme.Ebay_HW3Theme"
             android:exported="false"></activity>
         <activity
             android:name=".SearchResultsActivity"
+            android:theme="@style/Theme.Ebay_HW3Theme"
             android:exported="false"></activity>
         <activity
             android:name=".MainActivity"

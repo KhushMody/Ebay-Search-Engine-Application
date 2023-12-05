@@ -15,8 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,6 +63,8 @@ public class ShippingFragment extends Fragment {
     private String itemId;
     private String mParam2;
 
+
+    RelativeLayout relativeLayout;
     public String shippingCost;
     public ArrayList<SearchResultsResponse.ShippingInfo> shippingInfo;
     public ArrayList<SearchResultsResponse.SellingStatus> sellingStatus;
@@ -112,24 +114,16 @@ public class ShippingFragment extends Fragment {
             sellingStatus = new Gson().fromJson(sellingStatusJson, new TypeToken<ArrayList<SearchResultsResponse.SellingStatus>>() {}.getType());
             if (shippingInfo != null && !shippingInfo.isEmpty()) {
                 SearchResultsResponse.ShippingInfo firstShippingInfo = shippingInfo.get(0);
-                if (firstShippingInfo != null && firstShippingInfo.shippingServiceCost != null && !firstShippingInfo.shippingServiceCost.isEmpty()) {
-                    Toast.makeText(requireContext(), "First Shipping Cost: " + firstShippingInfo.shippingServiceCost.get(0).__value__, Toast.LENGTH_SHORT).show();
-                }
             }
             if(shippingCost != null){
                 tempShippingCost = shippingCost;
                 if(shippingCost.equals("0.0") || shippingCost.equals("0.00")){
                     tempShippingCost = "Free";
                 }
-                Toast.makeText(requireContext(), "shipping cost = "+shippingCost, Toast.LENGTH_SHORT).show();
             }
 
-            // Example: Display a Toast with the first sellingStatus value
             if (sellingStatus != null && !sellingStatus.isEmpty()) {
                 SearchResultsResponse.SellingStatus firstSellingStatus = sellingStatus.get(0);
-                if (firstSellingStatus != null && firstSellingStatus.currentPrice != null && !firstSellingStatus.currentPrice.isEmpty()) {
-                    Toast.makeText(requireContext(), "First Selling Price: " + firstSellingStatus.currentPrice.get(0).__value__, Toast.LENGTH_SHORT).show();
-                }
             }
         }
     }
@@ -145,6 +139,7 @@ public class ShippingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        relativeLayout = view.findViewById(R.id.progressLoadingShipping);
         observerEvents = objectModel -> {
             if (objectModel.isStatus()) {
                 ItemDetailsResponse.Item details = ((ItemDetailsResponse) objectModel.getObj()).item;
@@ -157,6 +152,7 @@ public class ShippingFragment extends Fragment {
                 storeURL = details.storefront != null ? details.storefront.storeURL : "";
                 storeName.setMovementMethod(LinkMovementMethod.getInstance());
                 storeName.setClickable(true);
+                relativeLayout.setVisibility(View.GONE);
                 ClickableSpan clickableSpan = new ClickableSpan() {
                     @Override
                     public void onClick(@NonNull View widget) {
@@ -247,8 +243,8 @@ public class ShippingFragment extends Fragment {
 
 
             } else {
+                relativeLayout.setVisibility(View.GONE);
                 Log.d("khushmody", objectModel.getMessage());
-                Toast.makeText(getContext(), objectModel.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
         shippingCost1 = view.findViewById(R.id.shippingCost1);

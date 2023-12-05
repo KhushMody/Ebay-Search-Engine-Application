@@ -152,7 +152,6 @@ public class SearchFragment extends Fragment {
 
             } else {
                 Log.d("khushmody", objectModel.getMessage());
-                Toast.makeText(getContext(), objectModel.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
 // Add a TextWatcher to monitor changes in the EditText

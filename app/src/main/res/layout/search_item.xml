@@ -29,11 +29,11 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="8dp"
-                android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
+                android:ellipsize="end"
                 android:maxLines="2"
                 android:text="Title dmsfkdgdf gmfd ldf v df bkdfkb fdk bkdf bkdfb "
                 android:textSize="18sp"
@@ -41,7 +41,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
 
                 <LinearLayout
                     android:layout_alignParentStart="true"

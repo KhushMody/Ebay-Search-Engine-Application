@@ -90,7 +90,6 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
                 relativeLayout.setVisibility(View.GONE);
                 loader.setVisibility(View.GONE);
                 Log.d("khushmody", objectModel.getMessage());
-                Toast.makeText(this, objectModel.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
         initActionBar();
@@ -128,6 +127,7 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
         String condition = clickedItem.condition.get(0).conditionDisplayName.get(0);
         searchResultsViewModel.addToCart(title, itemId, price, image, shippingCost, zipCode, condition);
         searchResultsAdapter.notifyDataSetChanged();
+        Toast.makeText(getApplicationContext() , title.substring(0,10)+"... was added to wishlist", Toast.LENGTH_SHORT).show();
         addToFavorites(new FavouritesResponse(itemId, image, title, price, zipCode, condition, shippingCost, true));
     }
 
@@ -136,7 +136,9 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
         SearchResultsResponse.Item clickedItem = items.get(position);
         clickedItem.inCart = false;
         searchResultsAdapter.notifyDataSetChanged();
+        String title = clickedItem.title.get(0);
         removeFavourite(clickedItem.itemId.get(0));
+        Toast.makeText(getApplicationContext() , title.substring(0,10)+"... was removed from wishlist", Toast.LENGTH_SHORT).show();
         searchResultsViewModel.removeFromCart(clickedItem.itemId.get(0));
     }
 
@@ -159,8 +161,7 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
             shippingCost = "Free";
         }
 
-        // Display itemId (you can customize how you want to display it, e.g., in a Toast)
-        Toast.makeText(this, "Clicked ItemId: " + itemId, Toast.LENGTH_SHORT).show();
+
 
         Intent intent = new Intent(SearchResultsActivity.this, ItemDetailsActivity.class);
         intent.putExtra("itemId", itemId);

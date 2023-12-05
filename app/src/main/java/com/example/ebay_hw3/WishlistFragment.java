@@ -116,6 +116,7 @@ public class WishlistFragment extends Fragment implements FavouriteResultsAdapte
         String shippingCost = clickedItem.shippingCost;
         String zipCode = clickedItem.zipCode;
         String condition = clickedItem.condition;
+        Toast.makeText(getContext() , title.substring(0,10)+"... was added to wishlist", Toast.LENGTH_SHORT).show();
         wishlistViewModel.addToCart(title, itemId, price, image, shippingCost, zipCode, condition);
         searchResultsAdapter.notifyDataSetChanged();
         updateNoItemsVisibility();
@@ -126,9 +127,11 @@ public class WishlistFragment extends Fragment implements FavouriteResultsAdapte
     public void dislikeClick(int position) {
         FavouritesResponse clickedItem = items.get(position);
         items.remove(position);
+        String title = clickedItem.title;
         searchResultsAdapter.notifyDataSetChanged();
         saveFavorites();
         wishlistViewModel.removeFromCart(clickedItem.itemId);
+        Toast.makeText(getContext() , title.substring(0,10)+"... was removed from wishlist", Toast.LENGTH_SHORT).show();
         updateNoItemsVisibility();
         updateTotalPrice();
     }
@@ -143,8 +146,6 @@ public class WishlistFragment extends Fragment implements FavouriteResultsAdapte
         ArrayList<SearchResultsResponse.SellingStatus> sellingStatus = null;
         String title = clickedItem.title;
 
-        // Display itemId (you can customize how you want to display it, e.g., in a Toast)
-        Toast.makeText(requireContext(), "Clicked ItemId: " + itemId, Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(requireActivity(), ItemDetailsActivity.class);
         intent.putExtra("itemId", itemId);

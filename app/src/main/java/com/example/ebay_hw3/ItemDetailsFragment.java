@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,11 +27,7 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ItemDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ItemDetailsFragment extends Fragment implements ImageSliderAdapter.OnClick {
 
     public static final String ARG_PARAM1 = "itemId";
@@ -76,7 +71,6 @@ public class ItemDetailsFragment extends Fragment implements ImageSliderAdapter.
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         listViewSpecifications = view.findViewById(R.id.ListViewSpecifications);
-        listViewSpecifications.setScrollContainer(false);
         itemTitle = view.findViewById(R.id.itemTitle);
         itemPriceShipping = view.findViewById(R.id.itemPriceShipping);
         itemPrice = view.findViewById(R.id.itemPrice);
@@ -110,10 +104,8 @@ public class ItemDetailsFragment extends Fragment implements ImageSliderAdapter.
                 relativeLayout.setVisibility(View.GONE);
                 linearLayout.setVisibility(View.VISIBLE);
                 Log.d("khushmody", objectModel.getMessage());
-                Toast.makeText(getContext(), objectModel.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
-
         itemDetailsViewModel.getItemDetails(itemId).observe(getViewLifecycleOwner(), observerEvents);
     }
 

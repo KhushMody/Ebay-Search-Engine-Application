@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +29,7 @@ public class PhotosFragment extends Fragment {
 
     String title;
     private PhotosViewModel photosViewModel;
+    RelativeLayout relativeLayout;
     private Observer<ObjectModel> observerEvents;
 
     private RecyclerView recyclerView;
@@ -52,15 +53,17 @@ public class PhotosFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        relativeLayout = view.findViewById(R.id.progressLoadingPhotos);
 
         observerEvents = objectModel -> {
             if (objectModel.isStatus()) {
                 PhotosResponse response = (PhotosResponse) objectModel.getObj();
+                relativeLayout.setVisibility(View.GONE);
                 ArrayList<PhotosResponse.Item> items = response.items;
                 photoAdapter.setItems(items);
             } else {
+                relativeLayout.setVisibility(View.GONE);
                 Log.d("khushmody", objectModel.getMessage());
-                Toast.makeText(getContext(), objectModel.getMessage(), Toast.LENGTH_SHORT).show();
             }
         };
 
